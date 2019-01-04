@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block title %}
-    <title>Add Drinks</title>
+    <title>Add drinks</title>
 {% endblock %}
 
 {% block nav_list %}
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid" style="margin-top: 50px">
+    <div class="container-fluid" style="margin-top: 70px">
 
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
@@ -44,24 +44,24 @@
                 </div>
             {% endif %}
 
-            <form method="POST" class="well" enctype="multipart/form-data">
+            <form method="POST" class="well">
 
                 {% csrf_token %}
-
-                {% for field in form.visible_fields %}
-                    <div class="form-group {% if field.errors %}has-error{% endif %}">
-                        <label class="control-label">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.errors %}
-                           <div class="has-error">
-                               <div class="help-block">{{ field.errors }}</div>
-                           </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+                {{ form.as_p }}
+{#                {% for field in form.visible_fields %}#}
+{#                    <div class="form-group {% if field.errors %}has-error{% endif %}">#}
+{#                        <label class="control-label">{{ field.label }}</label>#}
+{#                        {{ field }}#}
+{#                        {% if field.errors %}#}
+{#                           <div class="has-error">#}
+{#                               <div class="help-block">{{ field.errors }}</div>#}
+{#                           </div>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                {% endfor %}#}
 
                 <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-primary btn-block">Create</button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-block">Add</button>
                 </div>
 
             </form>

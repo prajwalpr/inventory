@@ -3,6 +3,7 @@ import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Category
+from drinks.forms import DrinksForm
 from django.http import HttpResponse
 
 from .forms import CategoryForm
