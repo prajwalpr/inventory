@@ -45,7 +45,11 @@
             <ul class="navbar-nav ml-auto">
                 {% block nav_list %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'category:list' %}">Category <span
+                        <a class="nav-link" href="{% url 'category:category_list' %}">Category <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'units:unit_list' %}">Units <span
                                 class="sr-only">(current)</span></a>
                     </li>
                 {% endblock %}

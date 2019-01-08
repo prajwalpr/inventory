@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Drinks</title>
+{% endblock %}
+
+{% block nav_list %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'category:category_list' %}">Category <span
+                class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="margin-top:70px">
+
+            {% for d in drinks_list %}
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ d.name }}
+                        </div>
+                        <div class="card-body">
+                            <img src="{{ d.image.url }}" style="width:100%; height: 250px">
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="{% url 'drinks:drinks_edit' d.id %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'drinks:drinks_delete' d.id %}" class="btn btn-primary">Delete</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

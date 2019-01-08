@@ -9,6 +9,7 @@ class DrinksForm(forms.ModelForm):
             'price',
             'units',
             'quantity',
+            'image',
         ]
 
         widgets = {
@@ -20,3 +21,10 @@ class DrinksForm(forms.ModelForm):
 
     def clean_name(self):
         return self.cleaned_data['name'].title()
+
+
+    def save(self, commit=True):
+        drinks = super(DrinksForm, self).save(commit=False)
+        if commit:
+            drinks.save()
+        return drinks
