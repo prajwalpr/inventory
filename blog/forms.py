@@ -16,3 +16,6 @@ class ContactForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={"class": 'form-control', "placeholder": 'Phone'}),
             'comment': forms.Textarea(attrs={"class": 'form-control', "placeholder": 'Comment', 'rows': 5})
         }
+
+    def clean_name(self):
+        return self.cleaned_data['name'].title()

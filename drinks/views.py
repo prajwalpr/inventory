@@ -18,6 +18,8 @@ def drinks_list(request):
 
 def drinks_create(request):
     form = DrinksForm(request.POST or None, request.FILES or None)
+
+
     if request.method == 'POST':
         try:
             category = Category.objects.get(id=request.GET.get('category'))
@@ -26,6 +28,7 @@ def drinks_create(request):
             return redirect("category:category_list")
 
         if form.is_valid():
+            # print(type(form.cleaned_data.get('category')))
             drinks = form.save(commit=False)
             drinks.cid = category
             drinks.save()
@@ -58,13 +61,19 @@ def drinks_edit(request, id):
     except Drinks.DoesNotExist:
         messages.error(request, 'Data doesnot found')
         return redirect('drinks:drinks_list')
-    form = DrinksForm(data=request.POST or None, instance=data, files=request.FILES or None)
+    # form = DrinksForm(data=request.POST or None , instance=data, files=request.FILES or None)
+    form = DrinksForm(instance=data)
     if request.method == 'POST':
         # form = DrinksForm(request.POST, request.FILES)
+        form = DrinksForm(request.POST, request.FILES, instance=data)
         if form.is_valid():
             dri = form.save(commit=False)
             dri.save()
             return redirect(reverse('drinks:drinks_list') + '?category='+ str(data.cid.id))
     return render(request, 'drinks/drinks_edit.html', {'form': form})
 
+
+def drinks_view(request, id):
+    drinks_view = Drinks.objects.get(id=id)
+    return render(request, 'drinks/drinks_view.html', {'drinks_view': drinks_view})
 

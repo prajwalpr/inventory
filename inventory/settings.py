@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'drinks',
     'category',
     'units',
+    'transaction',
     # 'django_bootstrap_breadcrumbs',
 
 ]

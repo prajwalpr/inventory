@@ -1,24 +1,29 @@
 from django.db import models
-from .validators import email_validators
+from .validators import PhoneValidators, NameValidators, TextValidators
 
 # Create your models here.
 
 class Contact(models.Model):
     name = models.CharField(
         max_length=100,
+        validators=[NameValidators()],
     )
     email = models.EmailField(
-        max_length=100,
         unique=True,
-        validators=[email_validators],
-        error_messages={
-            'unique': 'Email already exists.Please enter another email',
-        },
     )
-    phone = models.IntegerField()
-    comment = models.TextField()
+    phone = models.CharField(
+        max_length=30,
+        validators=[PhoneValidators()],
+        )
+    comment = models.TextField(
+        validators=[TextValidators()],
+    )
 
     class Meta:
         db_table = 'contact'
         verbose_name = 'Contact'
         verbose_name_plural = "Contacts"
+
+
+    def __str__(self):
+        pass

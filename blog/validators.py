@@ -1,11 +1,13 @@
+from django.core import validators
 
-import re
+class PhoneValidators(validators.RegexValidator):
+    regex = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$'
+    message = 'Enter a valid phone number.'
 
-from django.core.exceptions import ValidationError
+class NameValidators(validators.RegexValidator):
+    regex = r'^(\s)*[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-z])+))*(\s)*$'
+    message = 'Enter a valid name.'
 
-
-def email_validators(value):
-    regex = '^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'
-    pattern = re.compile(regex)
-    if not pattern.match(value):
-        raise ValidationError("Email is not valid")
+class TextValidators(validators.RegexValidator):
+    regex = r'^[a-zA-Z ]*$'
+    message = 'Enter valid text.'
